@@ -4,7 +4,8 @@ Kubectl and other minor tools installed in an alpine based image. Used for kuber
 
 Current tools:
 
-- `kubectl v1.16.0`
+- `kubectl v1.16.2`
+- `helm v3.0.0`
 - `git v2.22.0`
 - `make v4.2.1`
 
