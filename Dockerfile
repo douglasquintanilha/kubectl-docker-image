@@ -9,6 +9,15 @@ ENV MAKE_VERSION="4.2.1-r2"
 RUN apk update && \
     apk add make=${MAKE_VERSION} git=${GIT_VERSION} docker-cli=${DOCKER_CLI_VERSION}
 
+RUN apk add python \
+        py-pip \
+        groff \
+        less \
+        mailcap \
+        && \
+        pip install --upgrade awscli==1.16.206 s3cmd==2.0.2 python-magic && \
+        apk -v --purge del py-pip
+
 ADD https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl /bin/kubectl
 
 RUN chmod u+x /bin/kubectl
