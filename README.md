@@ -9,6 +9,7 @@ Current tools:
 - `helm v3.0.0`
 - `git v2.22.2`
 - `make v4.2.1`
+- `aws-cli v1.17.3`
 
 ## Hosted at:
 
