@@ -11,6 +11,8 @@ Current tools:
 - `make v4.2.1`
 - `aws-cli v1.17.3`
 
+**Check other branches** for different tags with other tools, like cli from cloud providers, etc..
+
 ## Hosted at:
 
 Docker Hub: https://hub.docker.com/repository/docker/douglasq/kubectl
