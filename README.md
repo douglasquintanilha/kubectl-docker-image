@@ -10,6 +10,8 @@ Current tools:
 - `git v2.22.2`
 - `make v4.2.1`
 
+**Check other branches** for different tags with other tools, like cli from cloud providers, etc..
+
 ## Hosted at:
 
 Quay: https://quay.io/repository/tfgco/kubectl
