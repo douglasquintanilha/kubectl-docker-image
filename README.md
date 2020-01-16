@@ -14,4 +14,3 @@ Current tools:
 ## Hosted at:
 
 Docker Hub: https://hub.docker.com/repository/docker/douglasq/kubectl
-  
