@@ -1,3 +1,5 @@
+[![Docker Repository on Quay](https://quay.io/repository/tfgco/kubectl/status "Docker Repository on Quay")](https://quay.io/repository/tfgco/kubectl)
+
 # Kubectl Image
 
 Kubectl and other minor tools installed in an alpine based image. Used for kubernetes deployments in CI/CD pipelines
