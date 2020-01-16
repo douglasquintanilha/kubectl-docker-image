@@ -10,6 +10,9 @@ Current tools:
 - `git v2.22.2`
 - `make v4.2.1`
 
+**Check other branches** for different tags with other tools, like cli from cloud providers, etc..
+
+
 ## Hosted at:
 
 Docker Hub: https://hub.docker.com/repository/docker/douglasq/kubectl
