@@ -5,9 +5,10 @@ ENV HELM_VERSION="v3.0.0"
 ENV DOCKER_CLI_VERSION="18.09.8-r0"
 ENV GIT_VERSION="2.22.4-r0"
 ENV MAKE_VERSION="4.2.1-r2"
+ENV DOCKER_COMPOSE_VERSION="1.24.1-r1"
 
 RUN apk update && \
-    apk add make=${MAKE_VERSION} git=${GIT_VERSION} docker-cli=${DOCKER_CLI_VERSION}
+    apk add make=${MAKE_VERSION} git=${GIT_VERSION} docker-cli=${DOCKER_CLI_VERSION} docker-compose=${DOCKER_COMPOSE_VERSION}
 
 ADD https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl /bin/kubectl
 
