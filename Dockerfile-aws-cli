@@ -1,4 +1,4 @@
-FROM alpine:3.12.0
+FROM frolvlad/alpine-glibc:alpine-3.12
 
 LABEL maintainer="Wildlife Studios"
 
@@ -28,7 +28,13 @@ RUN curl https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz  --output -
     tar -xzf - -C /tmp/ \
     && mv /tmp/linux-amd64/helm /bin/ \
     && chmod +x /bin/helm \
-    && rm -rf /tmp/linux-amd64    
+    && rm -rf /tmp/linux-amd64
+    
+RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip --output - | \
+      busybox unzip -d /tmp/ - && \
+      chmod +x -R /tmp/aws && \
+      ./tmp/aws/install && \
+      rm -rf ./tmp/aws
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
 CMD [ "bash" ]
