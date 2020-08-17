@@ -1,0 +1,45 @@
+name: Docker Image Build and Push
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  docker-build-push:
+    name: Docker Build and Push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Get the current version 
+      id: vars
+      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag douglasq/kubectl:latest
+    - name: Push the latest Docker image
+      run: docker push douglasq/kubectl:latest
+    - name: Tag the Docker image
+      run: docker tag douglasq/kubectl:latest douglasq/kubectl:${{steps.vars.outputs.tag}} 
+    - name: Push the tagged Docker image
+      run: docker push douglasq/kubectl:latest
+
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#   steps:
+#     - uses: actions/checkout@v2 # may be actions/checkout@v2 now
+#     - name: Login to DockerHub Registry
+#       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+#     - name: Get the version 
+#       id: vars
+#       run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+#     - name: Build the tagged Docker image
+#       run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
+#     - name: Push the tagged Docker image
+#       run: docker push pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
+#     - name: Build the latest Docker image
+#       run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:latest
+#     - name: Push the latest Docker image
+#       run: docker push pjlamb12/angular-cli:latest

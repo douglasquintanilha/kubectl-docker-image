@@ -1,21 +1,34 @@
-FROM alpine:3.10.3
+FROM alpine:3.12.0
 
-ENV KUBECTL_VERSION="v1.16.2"
-ENV HELM_VERSION="v3.0.0"
-ENV DOCKER_CLI_VERSION="18.09.8-r0"
-ENV GIT_VERSION="2.22.2-r0"
-ENV MAKE_VERSION="4.2.1-r2"
+LABEL maintainer="Douglas Quintanilha"
+
+ARG BASH_VERSION="5.0.17-r0"
+ARG CURL_VERSION="7.69.1-r0"
+ARG DOCKER_CLI_VERSION="19.03.12-r0"
+ARG DOCKER_COMPOSE_VERSION="1.25.4-r2"
+ARG GIT_VERSION="2.26.2-r0"
+ARG MAKE_VERSION="4.3-r0"
+
+ARG KUBECTL_VERSION="v1.18.8"
+ARG HELM_VERSION="v3.3.0"
 
 RUN apk update && \
-    apk add make=${MAKE_VERSION} git=${GIT_VERSION} docker-cli=${DOCKER_CLI_VERSION}
+    apk add bash=${BASH_VERSION} \
+            curl=${CURL_VERSION} \
+            docker-cli=${DOCKER_CLI_VERSION} \
+            docker-compose=${DOCKER_COMPOSE_VERSION} \
+            git=${GIT_VERSION} \
+            make=${MAKE_VERSION} 
 
-ADD https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl /bin/kubectl
 
-RUN chmod u+x /bin/kubectl
+RUN curl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl --output /bin/kubectl \ 
+    && chmod u+x /bin/kubectl
 
-ADD https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz /tmp
-    
-RUN tar -xf /tmp/helm-${HELM_VERSION}-linux-amd64.tar.gz \
-    && mv linux-amd64/helm /bin/ \
+RUN curl https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz  --output - | \
+    tar -xzf - -C /tmp/ \
+    && mv /tmp/linux-amd64/helm /bin/ \
     && chmod +x /bin/helm \
-    && rm -rf /tmp
+    && rm -rf /tmp/linux-amd64    
+
+ENTRYPOINT [ "/bin/bash", "-c" ]
+CMD [ "bash" ]
